@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="reg.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center">Student Enrollment Form</h2>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6">
+                <form id="form">
+                     <label for="">Name</label>
+                     <input type="text" name="name" id="name" class="input" required>
+                     <br>
+                     <label for="">Email</label>
+                     <input type="text" name="email" id="email" class="input1" required>
+                       <br>
+                      <label for="">Website</label>
+                     <input type="url" name="website" id="website" class="input2" required/>
+                     <br>
+          
+                     <label for="" class="mt-4">Gender</label>
+                     <input type="radio" name="gender" id="maleInput" value="male" class="gender-input"><label for="maleInput">Male</label> 
+                     <input type="radio" name="gender" id="femaleInput" class="gender-input" value="female"> <label for="femaleInput">Female</label>
+                     <br>
+            
+                     <label for="" class="mt-4">Skills</label>
+                      <label>
+                     <input type="checkbox" name="skill" value="HTML" class="skill-input"> HTML
+                     </label>
+                      <label>
+                       <input type="checkbox" name="skill" value=" CSS"> CSS
+                     </label>
+                     <label>
+                     <input type="checkbox" name="skill" value="JavaScript"> JavaScript
+                     </label>
+                     <br>
+                     <input type="submit" id="submit" class="bg-primary mt-5 button" value="Submit">
+                     <input type="reset" id="clear" class="bg-danger mt-5 ml-4 button" value="clear">
+                </form>
+             </div>
+
+            <div id="displayDetails" style="display: none;" class="result-box col-12 col-md-6 col-lg-6">
+              
+              <p><strong>Fullname:</strong> <span id="submitName"></span></p>
+              <p><strong>Email:</strong> <span id="submitEmail"></span></p>
+              <p><strong>Website:</strong> <span id="submitWebsite"></span></p>
+              <p><strong>Gender:</strong> <span id="selectGender"></span></p>
+              <p><strong>Skill:</strong><span id="selectedSkills"></span> </p>     
+              
+        
+            </div>
+      </div>
+   </div>
+
+
+
+     <script lang="JavaScript">
+        let formId = document.getElementById("form");
+        let displayId = document.getElementById("displayDetails");
+        let nameId = document.getElementById("submitName");
+        let emailId = document.getElementById("submitEmail");
+        let websiteId = document.getElementById("submitWebsite");
+        let genderSelect = document.getElementById("selectGender");
+        let female = document.getElementById("femaleInput");
+        let male = document.getElementById("maleInput");
+        let selectedSkillsList = document.getElementById("selectedSkills");
+        let submit=document.getElementById("submit");
+        let website=document.getElementById("website")
+        
+    
+
+      
+      
+      
+         // let imageId = document.getElementById("previewImage");
+      
+        
+        formId.addEventListener('submit', function(event){
+           event.preventDefault();
+
+           let fullName = formId.name.value;
+           let email = formId.email.value;
+           let webiteLink = formId.website.value;
+           
+           
+          
+       //    let imageLink = formId.image.value;
+
+           nameId.textContent = fullName;
+           emailId.textContent = email;
+           websiteId.textContent= webiteLink;
+
+
+             
+           //imageId.src = imageLink
+           
+
+           
+           displayId.style.display = 'block';
+
+           
+        });
+        
+        //gender
+
+        submit.addEventListener("click", function() {
+        const selectedGender = document.querySelector('input[name="gender"]:checked');
+        let genderText = "";
+
+        if (selectedGender) {
+            genderText = selectedGender.value;
+        } else {
+            genderText = "Unknown";
+        }
+
+        genderSelect.textContent = `${genderText}`;
+       });
+
+
+        submit.addEventListener("click", function() {
+        const selectedSkills = Array.from(document.querySelectorAll('input[name="skill"]:checked'));
+        selectedSkillsList.innerHTML = "";
+
+        if (selectedSkills.length === 0) {
+            selectedSkillsList.innerHTML = "No skills selected.";
+        } else {
+            const skillValues = selectedSkills.map(skill => skill.value);
+            selectedSkillsList.textContent = " " + skillValues.join(", ");
+        }
+        
+         });
+
+    </script>
+
+</body>
+</html>
